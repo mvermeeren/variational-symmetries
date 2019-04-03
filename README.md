@@ -43,7 +43,7 @@ If a continuous pluri-Lagrangian structure is successfully computed, it will be
 written to a file in the subfolder 'lagrangians'
 
 
-ADDING MORE EQUATIONS OR LAGRANGIANS
+ADDING MORE HIERARCHIES
 
-Custom equations and Lagrangians can be added in the method get_equation(switch)
-of the file 'varsym_input.sage'. A unique 'switch' should be introduced to select them.
+Custom equations and Lagrangians can be added in the method get_input(switch) of
+the file 'varsym_input.sage'. A unique 'switch' should be introduced to select them.
