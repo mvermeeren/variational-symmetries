@@ -12,7 +12,7 @@ The code consists of the following files:
 	* tools/init_discrete.sage
 	* tools/output.sage
 
-This software is written by
+This software is written was developed in Sage 7.5.1 by
 
 	Mats Vermeeren
 	TU Berlin
@@ -22,8 +22,6 @@ and published under the MIT License (see 'LICENCE' for more details)
 
 
 RUNNING THE PROGRAM
-
-	This code was developed in Sage 7.5.1. 
 	
 Execute the file 'varsym.sage' in SageMath.
 
