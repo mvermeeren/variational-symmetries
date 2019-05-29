@@ -10,7 +10,7 @@ switch = 'KdV'
 numtimes = 3
 
 # Include even-numbered times?
-even = True
+even = True #DO NOT CHANGE
 
 ### CHECKS
 
@@ -28,6 +28,9 @@ viewpdf = True
 
 # Print EL equations even if they are satisfied?
 viewELeqs = False
+
+# Save logs
+save = False
 
 ### SET EQUATION DEPENDENT PARAMETERS ###
 
@@ -54,33 +57,44 @@ if switch == 'SG':
 #constraints = [equations of non-evolutionary type]
 
 def get_input(switch):
-	constraints = []
-	###	
-	###
-	if switch == 'lin':
-		laglist = [0, v_1*v_2 - v_1*v_111, v_1*v_3 - v_1*v_11111, v_1*v_4 - v_1*v_1111111]
-		pde = [{2: v_2 == v_111, 3: v_3 == v_11111, 4: v_4 == v_1111111}]
-	###	
-	###
-	if switch == 'KdV':
-		laglist = [0, 1/2*v_1*v_2 - v_1^3 - 1/2*v_1*v_111, 
-			1/2*v_1*v_3 - 5/2*v_1^4 + 5*v_1*v_11^2 - 1/2*v_111^2]
-		pde = [{2: v_2 == 3*v_1^2 + v_111, 3: v_3 == 10*v_1^3 + 5*v_11^2 + 10*v_1*v_111 + v_11111}]
-	###	
-	###
-	if switch == 'NLS':
-		k = 1 #var('k')
-		laglist = [0, I/2*(v2_*v1_2 - v1_*v2_2) - v2_1*v1_1 - k*(v1_*v2_)^2,
-			I/2*(v2_*v1_3 - v1_*v2_3) + I/2*(v2_1*v1_11 - v1_1*v2_11) - 3/2*I*k*(v1_*v2_)*(v2_1*v1_ - v1_1*v2_)]
-		pde = [{2: v1_2 == I*v1_11 - 2*I*k*v1_*v2_*v1_, 3: v1_3 == v1_111 - 6*k*v1_*v2_*v1_1},
-			{2: v2_2 == -I*v2_11 + 2*I*k*v2_*v1_*v2_, 3: v2_3 == v2_111 - 6*k*v2_*v1_*v2_1}]
-	###	
-	###
-	if switch == 'SG':
-		k = 1 #var('k')
-		laglist = [0, 1/2*v_1*v_2 - cos(v_), 1/2*v_1*v_3 - 1/8*v_1^4 + 1/2*v_11^2, 1/2*v_1*v_4 - 1/16*v_1^6 - 5/12*v_1^3*v_111 - 1/2*v_111^2]
-		pde = [{3: v_3 == v_111 + 1/2*v_1^3, 4: v_4 == v_11111 + 5/2*v_1^2*v_111 + 5/2*v_1*v_11^2 + 3/8*v_1^5}]
-		constraints = [v_12 == sin(v_)]
-	###	
-	###
-	return [laglist,pde,constraints]
+    constraints = []
+    ###
+    ###
+    if switch == 'lin':
+        if numtimes == 3:
+            pde = [{2: v_2 == v_111, 3: v_3 == v_11111}]
+            laglist = [0, v_1*v_2 - v_1*v_111, v_1*v_3 - v_1*v_11111]
+        elif numtimes == 4:
+            pde = [{2: v_2 == v_111, 3: v_3 == v_11111, 4: v_4 == v_1111111}]
+            laglist = [0, v_1*v_2 - v_1*v_111, v_1*v_3 - v_1*v_11111, v_1*v_4 - v_1*v_1111111]
+        else:
+            pde = [{}]
+            laglist = [0]
+    ###
+    ###
+    if switch == 'KdV':
+        laglist = [0, 1/2*v_1*v_2 - v_1^3 - 1/2*v_1*v_111, 
+            1/2*v_1*v_3 - 5/2*v_1^4 + 5*v_1*v_11^2 - 1/2*v_111^2]
+        pde = [{2: v_2 == 3*v_1^2 + v_111, 3: v_3 == 10*v_1^3 + 5*v_11^2 + 10*v_1*v_111 + v_11111}]
+    ###
+    ###
+    if switch == 'NLS':
+        k = 1
+        laglist = [0, I/2*(v2_*v1_2 - v1_*v2_2) - v2_1*v1_1 - k*(v1_*v2_)^2,
+            I/2*(v2_*v1_3 - v1_*v2_3) + I/2*(v2_1*v1_11 - v1_1*v2_11) - 3/2*I*k*(v1_*v2_)*(v2_1*v1_ - v1_1*v2_)]
+        pde = [{2: v1_2 == I*v1_11 - 2*I*k*v1_*v2_*v1_, 3: v1_3 == v1_111 - 6*k*v1_*v2_*v1_1},
+            {2: v2_2 == -I*v2_11 + 2*I*k*v2_*v1_*v2_, 3: v2_3 == v2_111 - 6*k*v2_*v1_*v2_1}]
+    ###
+    ###
+    if switch == 'SG':
+        laglist = [0, 1/2*v_1*v_2 - cos(v_), 1/2*v_1*v_3 - 1/8*v_1^4 + 1/2*v_11^2, 1/2*v_1*v_4 - 1/16*v_1^6 - 5/12*v_1^3*v_111 - 1/2*v_111^2]
+        if numtimes == 3:
+            pde = [{3: v_3 == v_111 + 1/2*v_1^3}]
+        elif numtimes == 4:
+            pde = [{3: v_3 == v_111 + 1/2*v_1^3, 4: v_4 == v_11111 + 5/2*v_1^2*v_111 + 5/2*v_1*v_11^2 + 3/8*v_1^5}]
+        else:
+            pde = [{}]
+        constraints = [v_12 == sin(v_)]
+    ###
+    ###
+    return [laglist,pde,constraints]
