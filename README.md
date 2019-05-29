@@ -35,9 +35,6 @@ If the parameter 'save' is set to True, the program will create log files in the
 subfolder 'logs' and save final results in the subfolder 'lagrangians'. 
 If the parameter 'viewpdf' is set to True, a pdf of the output will be compiled.
 
-If a continuous pluri-Lagrangian structure is successfully computed, it will be 
-written to a file in the subfolder 'lagrangians'
-
 
 ADDING MORE HIERARCHIES
 
