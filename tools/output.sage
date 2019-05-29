@@ -6,16 +6,16 @@ import os
 def init_output(filename,even):
 	global output
 	global warning
-	global plaindoc
-	global latexdoc
-	if not os.path.exists('logs/'):
-		os.makedirs('logs/')
-	filename += '-' + str(numtimes)
-	if even:
-		filename += 'full'
-	plaindoc = open('logs/' + filename + '-plain','w')
-	latexdoc = open('logs/' + filename + '-tex','w')
-	
+	if save:
+		global plaindoc
+		global latexdoc
+		if not os.path.exists('logs/'):
+			os.makedirs('logs/')
+		filename += '-' + str(numtimes)
+		if even:
+			filename += 'full'
+		plaindoc = open('logs/' + filename + '-plain','w')
+		latexdoc = open('logs/' + filename + '-tex','w')
 	output = []	
 	warning = False
 
@@ -42,9 +42,9 @@ def latexadd(eqn,all=True):
 	print ""
 	if all:
 		output += ['\\scalebox{.1}{$' + latex(eqn) + '$}'] #['\\tiny ' + latex(eqn)]
-	if not(latexdoc.closed):
+	if save and not(latexdoc.closed):
 		latexdoc.write(cleanlatex(eqn) + '\n\n')
-	if not(plaindoc.closed):
+	if save and not(plaindoc.closed):
 		plaindoc.write(str(eqn) + '\n\n')
 		
 def textadd(string,all=True):
@@ -52,9 +52,9 @@ def textadd(string,all=True):
 	print "%.2f" % (walltime(w)) + "s: " + string
 	if all:
 		output += [latex('') + '\\scalebox{.1}{' + string + '}']
-	if not(latexdoc.closed):
+	if save and not(latexdoc.closed):
 		latexdoc.write(string + '\n\n')
-	if not(plaindoc.closed):
+	if save and not(plaindoc.closed):
 		plaindoc.write(string + '\n\n')
 		
 
@@ -62,8 +62,9 @@ def textadd(string,all=True):
 def end_output(viewpdf=True):	
 	if warning:
 		textadd('!!! WARNING(S) GENERATED !!!')
-	plaindoc.close()
-	latexdoc.close()
+	if save:
+		plaindoc.close()
+		latexdoc.close()
 
 	if viewpdf:
 		view(output)

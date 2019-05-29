@@ -248,7 +248,7 @@ def varder(dir,func,var,component=1):
 "dir" (list of integers, usually of length 2)
 with respect to "var", which can be given either as a field (e.g. v_12) or as a multi-index (e.g. [1,1,0,0,0])."""
 	result = 0
-	if type(var) == type(a):
+	if type(var) == type(t1):
 		var = fieldtoindex(var)
 	freeorder = order - weight(var)
 	for index in indices(freeorder,dim):
