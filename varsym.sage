@@ -9,11 +9,11 @@ else:
 	del varnames
 	
 ### Load input
-load('varsym_input.sage')
+# load('varsym_input.sage')
 
 secondorder = 0
 double = False
-order = 2*max(weights)-2
+order = 2*max(weights)
 
 ### Initizalize variables and load methods
 load('tools/2d_variational_calculus.sage')
@@ -42,8 +42,8 @@ replace = get_replace(pde)
 
 if checkcomm:
 	check_commutativity(pde)
-	for i in eqns:
-		if not( replace(varder([1,i],laglist[i-1],v_)) == 0):
+	for i in pde[0]:
+		if not( replace(varder([1,i],laglist[i-1], field([0]*numtimes),j )) == 0):
 			warning = True
 			textadd("PDEs do not satisfy EL equations for L_1" + str(i))
 
@@ -76,13 +76,13 @@ def plurilag(laglist):
 	for i in [1..numtimes-1]:
 		for j in [i+1..numtimes-1]:
 			for k in [0..order-1]:
-				index = [k] + [0 for l in [1..dim-1]]
-				index1 = [k+1] + [0 for l in [1..dim-1]]
+				index = [k] + [0]*(dim-1)
+				index1 = [k+1] + [0]*(dim-1)
 				for l in [1..components]:
 					if i+1 in pde[l-1]:
 						L[i,j] += varder([1,j+1],L[0][j],index1,l) * vdiff( pde[l-1][i+1].lhs() - pde[l-1][i+1].rhs(), deri(index) )
 					elif switch=="SG" and i==2 and k > 0: #workaround for non-evolutionary SG equation
-						L[i,j] += varder([1,j+1],L[0][j],index1,l) * vdiff( constraints[0].lhs() - constraints[0].rhs(), [k-1] + [0 for l in [1..dim-1]] )
+						L[i,j] += varder([1,j+1],L[0][j],index1,l) * vdiff( constraints[0].lhs() - constraints[0].rhs(), [k-1] + [0]*(dim-1) )
 					if j+1 in pde[l-1]:
 						L[i,j] += -varder([i+1,1],L[0][i],index1,l) * vdiff( pde[l-1][j+1].lhs() - pde[l-1][j+1].rhs(), deri(index) )
 	return expand(L - L.transpose())
@@ -100,4 +100,5 @@ elcheck(L)
 ### 
 
 end_output(viewpdf)
-save_lagrangian("varsym-" + str(switch), [pde,utriang(L)])
+if save:
+	save_lagrangian("varsym-" + str(switch), [pde,utriang(L)])

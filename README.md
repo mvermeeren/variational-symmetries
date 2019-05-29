@@ -1,18 +1,18 @@
 # variational-symmetries
 Constructing pluri-Lagrangian stuctures using variational symmetries, as presented in
 
-	Petrera, Vermeeren. Variational symmetries and pluri-Lagrangian hierarchies, 2019.
+	Petrera, Vermeeren. Variational symmetries and pluri-Lagrangian structures for integrable hierarchies of PDEs, 2019.
 
 The code consists of the following files:
 
-	* varsym.sage (Main)
-	* varsym_input.sage (Specify input here)
+	* varsym.sage
+	* varsym.ipynb
+	* varsym_input.sage
 	* tools/2d_variational_calculus.sage
 	* tools/init_continuous.sage
-	* tools/init_discrete.sage
 	* tools/output.sage
 
-This software is written was developed in Sage 7.5.1 by
+This software is written was developed in SageMath 8.1 by
 
 	Mats Vermeeren
 	TU Berlin
@@ -22,28 +22,21 @@ and published under the MIT License (see 'LICENCE' for more details)
 
 
 RUNNING THE PROGRAM
-	
-Execute the file 'varsym.sage' in SageMath.
 
-All input is given in the file 'varsym_input.sage'.
+Open the notebook varsym.ipynb in Sage (http://www.sagemath.org/). Change input as needed and load 'varsym.sage' from the notebook.
 
-The hierarchy under consideration is specified by setting 'switch'.
-The dimension of the multi-time in which it is embedded is to be specified 
-with 'numtimes'.
-Additional options are described in the comments of the file 'varsym_input.sage'.
+Alternatively: from the Sage command line load first 'varsym_input.sage' and then 'varsym.sage'.
 
 
 OUTPUT
 
-Aside from printing in the console, the program will create log files in the 
-subfolder 'logs'. If the parameter 'viewpdf' is set to True, a pdf of the
-output will be compiled.
-
-If a continuous pluri-Lagrangian structure is successfully computed, it will be 
-written to a file in the subfolder 'lagrangians'
+Output is printed in the notebook (or console).
+If the parameter 'save' is set to True, the program will create log files in the 
+subfolder 'logs' and save final results in the subfolder 'lagrangians'. 
+If the parameter 'viewpdf' is set to True, a pdf of the output will be compiled.
 
 
 ADDING MORE HIERARCHIES
 
-Custom equations and Lagrangians can be added in the method get_input(switch) of
-the file 'varsym_input.sage'. A unique 'switch' should be introduced to select them.
+Custom equations and Lagrangians can be added in the method get_input(switch) in the notebook (or in
+the file 'varsym_input.sage'). A unique 'switch' should be introduced to select them.
