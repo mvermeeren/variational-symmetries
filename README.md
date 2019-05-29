@@ -1,7 +1,7 @@
 # variational-symmetries
 Constructing pluri-Lagrangian stuctures using variational symmetries, as presented in
 
-	Petrera, Vermeeren. Variational symmetries and pluri-Lagrangian hierarchies, 2019.
+	Petrera, Vermeeren. Variational symmetries and pluri-Lagrangian structures for integrable hierarchies of PDEs, 2019.
 
 The code consists of the following files:
 
@@ -30,9 +30,10 @@ Alternatively: from the Sage command line load first 'varsym_input.sage' and the
 
 OUTPUT
 
-Aside from printing in the notebook (or console), the program will create log files in the 
-subfolder 'logs'. If the parameter 'viewpdf' is set to True, a pdf of the
-output will be compiled.
+Output is printed in the notebook (or console).
+If the parameter 'save' is set to True, the program will create log files in the 
+subfolder 'logs' and save final results in the subfolder 'lagrangians'. 
+If the parameter 'viewpdf' is set to True, a pdf of the output will be compiled.
 
 If a continuous pluri-Lagrangian structure is successfully computed, it will be 
 written to a file in the subfolder 'lagrangians'
