@@ -67,7 +67,6 @@ def check_commutativity(pde):
 		for i in pde[component-1]:
 			for j in pde[component-1]:
 				if i < j:
-					print j
 					if not( component == secondorder and i == 2):
 						test = cleantrig(replace( vdiff(pde[component-1][i].rhs(), eval("t"+str(j)) ) - vdiff(pde[component-1][j].rhs(), eval("t"+str(i)) )))
 					else:
