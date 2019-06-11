@@ -12,7 +12,7 @@ The code consists of the following files:
 	* tools/init_continuous.sage
 	* tools/output.sage
 
-This software is written was developed in SageMath 8.1 by
+This software was developed in SageMath 8.1 by
 
 	Mats Vermeeren
 	TU Berlin
