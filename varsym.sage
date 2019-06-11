@@ -1,12 +1,4 @@
 #!/usr/bin/env sage
-
-### Clear "varnames" if set
-try:
-	varnames
-except NameError:
-	0
-else:
-	del varnames
 	
 ### Load input
 # load('varsym_input.sage')
