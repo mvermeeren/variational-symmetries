@@ -1,4 +1,3 @@
-# variational-symmetries
 Constructing pluri-Lagrangian stuctures using variational symmetries, as presented in
 
 	Petrera, Vermeeren. Variational symmetries and pluri-Lagrangian structures for integrable hierarchies of PDEs, 2019.
